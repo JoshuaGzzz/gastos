@@ -63,10 +63,15 @@ st.markdown("---")
 
 # Stopwatch calculation
 elapsed = time.time() - st.session_state.start_time
-mins = int(elapsed // 60)
+
+days = int(elapsed // 86400)
+hours = int((elapsed % 86400) // 3600)
+mins = int((elapsed % 3600) // 60)
 secs = int(elapsed % 60)
 millis = int((elapsed * 1000) % 1000)
-time_text = f"{mins:02d}:{secs:02d}:{millis:03d}"
+
+time_text = f"{days:02d}:{hours:02d}:{mins:02d}:{secs:02d}:{millis:03d}"
+
 
 st.markdown(
     f"<h2 style='text-align:center;'>HOURS SINCE LAST SPEND</h2>"
