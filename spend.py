@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 st.set_page_config(layout="centered")
@@ -50,7 +50,7 @@ if "last_reset" not in st.session_state:
 st.markdown("<h1 style='text-align:center;'>KELAN HULING GUMASTOS SI JOSEPH MEDINA</h1>", unsafe_allow_html=True)
 
 # Current date/time
-now = datetime.now().strftime("%B %d, %Y — %I:%M:%S %p")
+now = (datetime.utcnow() + timedelta(hours=8)).strftime("%B %d, %Y — %I:%M:%S %p")
 st.markdown(f"<h3 style='text-align:center;'>Current Date & Time:<br>{now}</h3>", unsafe_allow_html=True)
 
 st.markdown("---")
