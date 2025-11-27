@@ -12,11 +12,17 @@ DATA_FILE = "data.json"
 # Load saved data
 # ----------------------
 def load_data():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    return None
+    if not os.path.exists("data.json"):
+        return []  # return empty list if file doesn't exist
 
+    try:
+        with open("data.json", "r") as f:
+            content = f.read().strip()
+            if not content:
+                return []  # return empty list if JSON file is empty
+            return json.loads(content)  # safe loading
+    except json.JSONDecodeError:
+        return []  # return empty if corrupted
 # ----------------------
 # Save data
 # ----------------------
