@@ -97,8 +97,8 @@ st.write("### 💸 Reset Timer")
 
 # clear_on_submit=True wipes the input field after clicking the button
 with st.form("reset_form", clear_on_submit=True):
-    reason = st.text_input("Reason for spending", placeholder="e.g., Coffee, GrabFood, Shopee...")
-    submitted = st.form_submit_button("I Spent Money (Reset)", use_container_width=True)
+    reason = st.text_input("Reason for spending", placeholder="e.g., fucking photocards")
+    submitted = st.form_submit_button("Reset at gumastos si Joseph", use_container_width=True)
 
     if submitted:
         # 1. Capture Data
