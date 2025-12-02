@@ -2,12 +2,18 @@ import streamlit as st
 import time
 import json
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import os
 
 st.set_page_config(layout="centered", page_title="Spend Tracker")
 
 DATA_FILE = "data.json"
+
+# ----------------------
+# Config: Timezone (GMT+8)
+# ----------------------
+# This creates a timezone object for GMT+8
+TZ_MANILA = timezone(timedelta(hours=8))
 
 # ----------------------
 # Load saved data
@@ -63,9 +69,9 @@ def format_duration_text(seconds):
 # ----------------------
 st.markdown("<h1 style='text-align:center;'>KELAN HULING GUMASTOS SI JOSEPH MEDINA</h1>", unsafe_allow_html=True)
 
-# Current date/time
-now = datetime.now().strftime("%B %d, %Y — %I:%M:%S %p")
-st.markdown(f"<h3 style='text-align:center;'>Current Date & Time:<br>{now}</h3>", unsafe_allow_html=True)
+# Current date/time (ADJUSTED TO GMT+8)
+now = datetime.now(TZ_MANILA).strftime("%B %d, %Y — %I:%M:%S %p")
+st.markdown(f"<h3 style='text-align:center;'>Current Date & Time (PH):<br>{now}</h3>", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -101,8 +107,8 @@ with st.form("reset_form", clear_on_submit=True):
     submitted = st.form_submit_button("Reset at gumastos si Joseph", use_container_width=True)
 
     if submitted:
-        # 1. Capture Data
-        current_time = datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+        # 1. Capture Data (ADJUSTED TO GMT+8)
+        current_time = datetime.now(TZ_MANILA).strftime("%Y-%m-%d %I:%M:%S %p")
         duration_string = format_duration_text(elapsed) # Use the friendly format for history
         clean_reason = reason if reason else "No reason provided"
 
